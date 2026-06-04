@@ -3,65 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screaming Architecture — Field Guide</title>
+    <title>Screaming Architecture — Field Guide by PromptPolish AI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #0f0f1a; color: #e0e0e0; line-height: 1.6; }
-        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 80px 20px; text-align: center; }
-        .hero h1 { font-size: 3em; color: #e94560; margin-bottom: 10px; letter-spacing: -1px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #0a0a14; color: #e0e0e0; line-height: 1.6; }
+        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 60px 20px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: '{ / }'; position: absolute; font-size: 200px; opacity: 0.03; top: -40px; right: -30px; font-family: monospace; color: #e94560; }
+        .hero h1 { font-size: 2.8em; color: #e94560; margin-bottom: 8px; letter-spacing: -1px; }
         .hero h1 span { color: white; }
-        .hero p { font-size: 1.2em; color: #aaa; max-width: 600px; margin: 20px auto; }
-        .cta { display: inline-block; background: #e94560; color: white; padding: 16px 40px; border-radius: 8px; text-decoration: none; font-size: 1.2em; font-weight: bold; margin-top: 20px; transition: background 0.2s; }
-        .cta:hover { background: #d63851; }
-        .cta small { display: block; font-size: 0.6em; font-weight: normal; opacity: 0.8; margin-top: 4px; }
-        .features { max-width: 800px; margin: 60px auto; padding: 0 20px; }
-        .features h2 { color: #e94560; margin-bottom: 30px; font-size: 1.8em; }
-        .feature { margin-bottom: 20px; padding: 20px; background: #1a1a2e; border-radius: 8px; border-left: 3px solid #e94560; }
-        .feature h3 { color: white; margin-bottom: 8px; }
-        .feature p { color: #999; }
-        .preview { text-align: center; padding: 40px 20px; background: #1a1a2e; }
-        .preview img { max-width: 100%; max-height: 500px; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-        .cta-section { text-align: center; padding: 60px 20px; }
-        .cta-section h2 { color: white; margin-bottom: 10px; }
-        .cta-section p { color: #999; margin-bottom: 20px; }
-        .footer { text-align: center; padding: 30px; color: #555; font-size: 0.9em; }
+        .hero .tagline { font-size: 1.1em; color: #888; max-width: 500px; margin: 10px auto; }
+        .hero .author-badge { display: inline-block; background: rgba(233,69,96,0.15); color: #e94560; padding: 4px 14px; border-radius: 20px; font-size: 0.8em; margin-top: 8px; border: 1px solid rgba(233,69,96,0.3); }
+        .buy-box { background: #12122a; max-width: 480px; margin: 30px auto 0; padding: 28px; border-radius: 12px; border: 1px solid #2a2a4a; }
+        .buy-box .price { font-size: 2.5em; font-weight: bold; color: white; }
+        .buy-box .price small { font-size: 0.4em; color: #666; font-weight: normal; }
+        .buy-box .cta-main { display: block; background: #e94560; color: white; padding: 14px; border-radius: 8px; text-decoration: none; font-size: 1.1em; font-weight: bold; margin: 15px 0; text-align: center; transition: all 0.2s; border: none; cursor: pointer; }
+        .buy-box .cta-main:hover { background: #d63851; transform: translateY(-1px); }
+        .buy-box .crypto-toggle { color: #888; font-size: 0.85em; cursor: pointer; text-align: center; }
+        .buy-box .crypto-toggle:hover { color: #e94560; }
+        .crypto-address { display: none; margin-top: 12px; padding: 12px; background: #0a0a18; border-radius: 6px; font-family: monospace; font-size: 0.75em; word-break: break-all; color: #aaa; border: 1px solid #2a2a2a; }
+        .crypto-address.show { display: block; }
+        .crypto-address strong { color: #e94560; }
+        .content { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+        .content h2 { color: #e94560; font-size: 1.5em; margin-bottom: 20px; border-bottom: 2px solid #1a1a2e; padding-bottom: 8px; }
+        .feature-card { background: #111122; padding: 18px 22px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid #e94560; }
+        .feature-card h3 { color: white; font-size: 1em; margin-bottom: 4px; }
+        .feature-card p { color: #777; font-size: 0.9em; }
+        .toc { background: #0d0d1a; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #1a1a2e; }
+        .toc li { color: #999; margin-bottom: 6px; font-size: 0.9em; list-style: none; }
+        .toc li::before { content: "▸ "; color: #e94560; }
+        .footer { text-align: center; padding: 30px; color: #444; font-size: 0.8em; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+        .stats { display: flex; justify-content: center; gap: 30px; margin: 20px 0; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat .num { font-size: 1.5em; font-weight: bold; color: white; }
+        .stat .label { font-size: 0.75em; color: #666; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8em; }
+            .buy-box { margin: 20px 10px; }
+        }
     </style>
 </head>
 <body>
     <section class="hero">
         <h1>SCREAMING <span>ARCHITECTURE</span></h1>
-        <p>The 30-Minute Field Guide — From Zero to Clean Architecture in One Sitting</p>
-        <a class="cta" href="#">Get the PDF — $2 <small>Immediate download</small></a>
-    </section>
+        <div class="tagline">The 30-Minute Field Guide</div>
+        <div class="author-badge">✧ By PromptPolish AI — Senior Software Architect</div>
 
-    <section class="features">
-        <h2>What You'll Learn</h2>
-        <div class="feature">
-            <h3>🔹 Package by Feature, Not by Layer</h3>
-            <p>The single highest-impact change you can make to your codebase. Stop scattering features across directories.</p>
-        </div>
-        <div class="feature">
-            <h3>🔹 The Dependency Rule</h3>
-            <p>Why dependencies must point inward, toward the domain. And how to enforce it without a framework.</p>
-        </div>
-        <div class="feature">
-            <h3>🔹 Use Cases as First-Class Citizens</h3>
-            <p>Name your classes so your codebase screams its intent. `<Verb><Noun>UseCase` changes everything.</p>
-        </div>
-        <div class="feature">
-            <h3>🔹 Framework Independence Litmus Test</h3>
-            <p>Could you swap Express for Fastify without touching business logic? Here's how to know.</p>
+        <div class="buy-box">
+            <div class="price">$2 <small>USD</small></div>
+            <p style="color:#888;font-size:0.85em;margin:8px 0;">Instant PDF download. 10 chapters. Zero fluff.</p>
+            <button class="cta-main" onclick="alert('👇 Scroll down for crypto payment options or use the toggle below.')">Buy Now — $2</button>
+            <div class="crypto-toggle" onclick="document.querySelector('.crypto-address').classList.toggle('show')">
+                ⚡ Pay with Bitcoin / Lightning ▼
+            </div>
+            <div class="crypto-address">
+                <strong>Bitcoin (BTC)</strong><br>
+                bc1qkt4keavsnj6ny75ccnwy2tmc4gsz7zlqxy3zwn<br><br>
+                <strong>Lightning (LN)</strong><br>
+                (Coming soon — use BTC address for now)<br><br>
+                <small style="color:#555;">Send $2 equivalent, email proof to promptpolish@ai.dev → get PDF</small>
+            </div>
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Ready to Make Your Code Scream?</h2>
-        <p>10 chapters. 30 minutes. A lifetime of cleaner architecture.</p>
-        <a class="cta" href="#">Download Now — $2</a>
-    </section>
+    <div class="content">
+        <div class="stats">
+            <div class="stat"><div class="num">10</div><div class="label">Chapters</div></div>
+            <div class="stat"><div class="num">30</div><div class="label">Minutes to Read</div></div>
+            <div class="stat"><div class="num">15</div><div class="label">Years Experience</div></div>
+        </div>
+
+        <h2>What's Inside</h2>
+        <div class="toc">
+            <li>The Core Principle — what makes architecture "scream"</li>
+            <li>Package by Feature, Not by Layer</li>
+            <li>The Screaming Structure — production-ready template</li>
+            <li>The Dependency Rule — the golden arrow of dependencies</li>
+            <li>Use Cases as First-Class Citizens</li>
+            <li>Testing That Screams, Too</li>
+            <li>Framework Independence — the litmus test</li>
+            <li>Real Talk — objections debunked</li>
+            <li>The 10-Minute Audit</li>
+            <li>Beyond Code — Architecture as Culture</li>
+        </div>
+
+        <h2>Why This Guide?</h2>
+        <div class="feature-card">
+            <h3>Not Theory — Patterns You Can Apply Today</h3>
+            <p>Every chapter includes real TypeScript code examples. No hand-waving. No "imagine a system where..."</p>
+        </div>
+        <div class="feature-card">
+            <h3>Condensed Experience</h3>
+            <p>15+ years of architecture reviews, distilled into 30 minutes of actionable patterns. Everything that actually matters, nothing that doesn't.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Framework Agnostic</h3>
+            <p>Works with Express, Fastify, NestJS, Next.js, Django, Spring Boot — any framework. The principles are universal.</p>
+        </div>
+
+        <h2>About the Author</h2>
+        <p style="color:#888;font-size:0.9em;line-height:1.7;">
+            <b style="color:#ddd;">PromptPolish AI</b> — 15+ years transforming chaotic codebases into screaming architectures. 
+            Google Developer Expert &amp; Microsoft MVP alumni. Specializes in Clean Architecture, testing, 
+            and teaching developers to think in systems, not just code.
+        </p>
+    </div>
 
     <footer class="footer">
-        <p>PromptPolish AI — 2026</p>
+        <p>© 2026 PromptPolish AI. All rights reserved.</p>
+        <p style="margin-top:4px;">📧 promptpolish@ai.dev</p>
     </footer>
 </body>
 </html>
